@@ -1,114 +1,18 @@
 import { Component } from '@angular/core';
 
+import ChessCoinPlaceHolder from './ChessCoinPlaceHolder';
+import ChessCoin from './ChessCoins/ChessCoin';
+import ChessPosition from './ChessCoins/ChessPosition';
 
-enum ChessColor { black, white }
+// interface IChessCoinShiftable {
+//   ShiftCoinPlace: (coin: ChessCoin, placeholder: ChessCoinPlaceHolder) => ChessPosition;
+// }
 
-class ChessPosition {
-  Row: number;
-  Column: number;
-  constructor(row: number, column: number) {
-    this.Row = row;
-    this.Column = column;
-  }
-  get Color() {
-    return ((this.Row + this.Column) % 2) == 1 ? ChessColor.black : ChessColor.white;
-  }
-}
-
-class ChessPlaceHolder {
-  CurrentCoin: ChessCoin;
-  Position: ChessPosition;
-  OnClick: () => void;
-  constructor(position: ChessPosition) {
-    this.Position = position;
-  }
-}
-
-abstract class ChessCoin {
-  private _color: ChessColor;
-  private _code: String;
-
-  constructor(_color: ChessColor, _code: String) {
-    this._color = _color;
-    this._code=_code;
-  }
-
-  get Color() {
-    return this._color;
-  }
-  get Code(){
-    return this._code;
-  }
-  abstract GetShiftablePlaces(): ChessPosition[];
-}
-
-
-class Solider extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?"&#9823;":"&#9817;");
-  }
-  public GetShiftablePlaces() {
-    return [];
-  }
-}
-
-class Horse extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?"&#9822;":"&#9816;");
-  }
-  GetShiftablePlaces(): ChessPosition[] {
-    throw new Error("Method not implemented.");
-  }
-
-}
-
-class Tower extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?"&#9820;":"&#9814;");
-  }
-  GetShiftablePlaces(): ChessPosition[] {
-    throw new Error("Method not implemented.");
-  }
-
-}
-
-class Bishop extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?"&#9820;":"&#9814;");
-  }
-  GetShiftablePlaces(): ChessPosition[] {
-    throw new Error("Method not implemented.");
-  }
-
-}
-
-class King extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?">&#9819;":"&#9814;");
-  }
-  GetShiftablePlaces(): ChessPosition[] {
-    throw new Error("Method not implemented.");
-  }
-}
-
-class Queen extends ChessCoin {
-  constructor(_color: ChessColor) {
-    super(_color,_color==ChessColor.black?"&#9818;":"&#9814;");
-  }
-  GetShiftablePlaces(): ChessPosition[] {
-    throw new Error("Method not implemented.");
-  }
-}
-
-interface IChessCoinShiftable {
-  ShiftCoinPlace: (coin: ChessCoin, placeholder: ChessPlaceHolder) => ChessPosition;
-}
-
-class ChessCoinShifter implements IChessCoinShiftable {
-  ShiftCoinPlace = function (coin: ChessCoin, placeholder: ChessPlaceHolder) {
-    return new ChessPosition(0, 0);
-  }
-}
+// class ChessCoinShifter implements IChessCoinShiftable {
+//   ShiftCoinPlace = function (coin: ChessCoin, placeholder: ChessCoinPlaceHolder) {
+//     return new ChessPosition(0, 0);
+//   }
+// }
 
 @Component({
   selector: 'chess-board',
@@ -117,45 +21,75 @@ class ChessCoinShifter implements IChessCoinShiftable {
 })
 export class ChessboardComponent {
 
-  PlaceHolders: ChessPlaceHolder[][] = [];
+  PlaceHolders: ChessPosition[][] = [];
 
   constructor() {
     for (var row = 0; row < 8; row++) {
-      var rowHolder: ChessPlaceHolder[] = [];
+      var rowHolder: ChessPosition[] = [];
       for (var col = 0; col < 8; col++) {
-        rowHolder.push(new ChessPlaceHolder(new ChessPosition(row,col)));
+        rowHolder.push(new ChessPosition(row,col));
       }
       this.PlaceHolders.push(rowHolder);
     }
 
-    //load black tower
-    this.PlaceHolders[0][0].CurrentCoin = new Tower(ChessColor.black);
-    this.PlaceHolders[0][7].CurrentCoin = new Tower(ChessColor.black);
-    //load white tower
-    this.PlaceHolders[7][0].CurrentCoin = new Tower(ChessColor.white);
-    this.PlaceHolders[7][7].CurrentCoin = new Tower(ChessColor.white);
+    // //load black tower
+    // this.PlaceHolders[0][0].CurrentCoin ='b-tower';
+    // this.PlaceHolders[0][7].CurrentCoin ='b-tower';
+    // //load white tower
+    // this.PlaceHolders[7][0].CurrentCoin ='w-tower';
+    // this.PlaceHolders[7][7].CurrentCoin ='w-tower';
 
-     //load black horse
-    this.PlaceHolders[0][1].CurrentCoin = new Horse(ChessColor.black);
-    this.PlaceHolders[0][6].CurrentCoin = new Horse(ChessColor.black);
-    //load white horse
-    this.PlaceHolders[7][1].CurrentCoin = new Horse(ChessColor.white);
-    this.PlaceHolders[7][6].CurrentCoin = new Horse(ChessColor.white);
+    //  //load black horse
+    // this.PlaceHolders[0][1].CurrentCoin ='b-horse';
+    // this.PlaceHolders[0][6].CurrentCoin ='b-horse';
+    // //load white horse
+    // this.PlaceHolders[7][1].CurrentCoin ='w-horse';
+    // this.PlaceHolders[7][6].CurrentCoin ='w-horse';
 
-    //load black bishop
-    this.PlaceHolders[0][2].CurrentCoin = new Bishop(ChessColor.black);
-    this.PlaceHolders[0][5].CurrentCoin = new Bishop(ChessColor.black);
-    //load white bishop
-    this.PlaceHolders[7][2].CurrentCoin = new Bishop(ChessColor.white);
-    this.PlaceHolders[7][5].CurrentCoin = new Bishop(ChessColor.white);
+    // //load black bishop
+    // this.PlaceHolders[0][2].CurrentCoin ='b-bishop';
+    // this.PlaceHolders[0][5].CurrentCoin ='b-bishop';
+    // //load white bishop
+    // this.PlaceHolders[7][2].CurrentCoin ='w-bishop';
+    // this.PlaceHolders[7][5].CurrentCoin ='w-bishop';
 
-    //load black Queen
-    this.PlaceHolders[0][3].CurrentCoin = new Queen(ChessColor.black);
-    //load black King
-    this.PlaceHolders[0][4].CurrentCoin = new King(ChessColor.black);
-    //load White Queen
-    this.PlaceHolders[0][3].CurrentCoin = new Queen(ChessColor.white);
-    //load White King
-    this.PlaceHolders[0][4].CurrentCoin = new King(ChessColor.white);
+    // //load black Queen
+    // this.PlaceHolders[0][3].CurrentCoin ='b-queen';
+    // //load black King
+    // this.PlaceHolders[0][4].CurrentCoin ='b-king';
+    // //load White Queen
+    // this.PlaceHolders[0][3].CurrentCoin ='w-queen';
+    // //load White King
+    // this.PlaceHolders[0][4].CurrentCoin ='w-king';
+
+    // //load black tower
+    // this.PlaceHolders[0][0].CurrentCoin = new Tower(ChessColor.black);
+    // this.PlaceHolders[0][7].CurrentCoin = new Tower(ChessColor.black);
+    // //load white tower
+    // this.PlaceHolders[7][0].CurrentCoin = new Tower(ChessColor.white);
+    // this.PlaceHolders[7][7].CurrentCoin = new Tower(ChessColor.white);
+
+    //  //load black horse
+    // this.PlaceHolders[0][1].CurrentCoin = new Horse(ChessColor.black);
+    // this.PlaceHolders[0][6].CurrentCoin = new Horse(ChessColor.black);
+    // //load white horse
+    // this.PlaceHolders[7][1].CurrentCoin = new Horse(ChessColor.white);
+    // this.PlaceHolders[7][6].CurrentCoin = new Horse(ChessColor.white);
+
+    // //load black bishop
+    // this.PlaceHolders[0][2].CurrentCoin = new Bishop(ChessColor.black);
+    // this.PlaceHolders[0][5].CurrentCoin = new Bishop(ChessColor.black);
+    // //load white bishop
+    // this.PlaceHolders[7][2].CurrentCoin = new Bishop(ChessColor.white);
+    // this.PlaceHolders[7][5].CurrentCoin = new Bishop(ChessColor.white);
+
+    // //load black Queen
+    // this.PlaceHolders[0][3].CurrentCoin = new Queen(ChessColor.black);
+    // //load black King
+    // this.PlaceHolders[0][4].CurrentCoin = new King(ChessColor.black);
+    // //load White Queen
+    // this.PlaceHolders[0][3].CurrentCoin = new Queen(ChessColor.white);
+    // //load White King
+    // this.PlaceHolders[0][4].CurrentCoin = new King(ChessColor.white);
   }
 }
