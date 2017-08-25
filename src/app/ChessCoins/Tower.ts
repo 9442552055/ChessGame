@@ -1,15 +1,13 @@
-import ChessCoin from './ChessCoin'
-import ChessColor from './ChessColor'
-import ChessPosition from './ChessPosition'
+import { ChessPosition } from '../ChessPosition'
+import { AbstractChessCoin } from './AbstractChessCoin';
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'tower',
-    template: '<span *ngIf="Color">&#9814;</span><span *ngIf="!Color">&#9820;</span>',
-    styleUrls: ['../chessboard.component.css']
+    template: '<span *ngIf="Color">&#9814;</span><span *ngIf="!Color">&#9820;</span>'
 })
-export class Tower extends ChessCoin {
+export class Tower extends AbstractChessCoin {
     Name: String = "tower";
     constructor() {
         //super( "tower", _color == ChessColor.black ? "&#9820;" : "&#9814;");

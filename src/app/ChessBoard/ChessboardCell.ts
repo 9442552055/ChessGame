@@ -1,24 +1,36 @@
-import ChessCoin from './ChessCoins/ChessCoin'
-import ChessPosition from './ChessCoins/ChessPosition'
-import ChessColor from './ChessCoins/ChessColor'
-import Solider from './ChessCoins/Solider'
-import Tower from './ChessCoins/Tower'
-import Horse from './ChessCoins/Horse'
+
+import ChessPosition from '../ChessPosition';
+import ChessColor from '../ChessColor';
+
+import { Solider, Tower, Horse, Bishop, Queen, King, AbstractChessCoin } from '../ChessCoins'
+
+import ChessboardService from "./ChessboardService";
 
 import { Component, Input, OnInit } from '@angular/core';
-import { Bishop } from "./ChessCoins/Bishop";
-import { Queen } from "./ChessCoins/Queen";
-import { King } from "./ChessCoins/King";
+
 
 @Component({
     selector: 'chess-coin-placeholder',
-    templateUrl: './ChessCoinPlaceHolder.html',
+    templateUrl: './ChessboardCell.html',
     //inputs:['ChessCellPosition']
-    styleUrls: ['./chessboard.component.css']
+    styleUrls: ['./Chessboard.css']
 })
-export class ChessCoinPlaceHolder implements OnInit {
+export class ChessboardCell implements OnInit {
+
+    CurrentCoin: AbstractChessCoin;
+
+    IsSelected: boolean;
+
+    @Input('ChessCellPosition')
+    ChessCellPosition: ChessPosition;
+    private _chessGameService: ChessboardService;
+    constructor(ChessboardService: ChessboardService) {
+        this._chessGameService = ChessboardService;
+        this._chessGameService.AddPlaceHolder(this);
+    }
 
     ngOnInit(): void {
+
         if (this.ChessCellPosition.Row == 0) {
             if (this.ChessCellPosition.Column == 0 || this.ChessCellPosition.Column == 7) {
                 this.CurrentCoin = new Tower();
@@ -32,11 +44,11 @@ export class ChessCoinPlaceHolder implements OnInit {
                 this.CurrentCoin = new Bishop();
                 this.CurrentCoin.Color = ChessColor.black;
             }
-            else if (this.ChessCellPosition.Column == 4 ) {
+            else if (this.ChessCellPosition.Column == 4) {
                 this.CurrentCoin = new Queen();
                 this.CurrentCoin.Color = ChessColor.black;
             }
-            else if (this.ChessCellPosition.Column == 3 ) {
+            else if (this.ChessCellPosition.Column == 3) {
                 this.CurrentCoin = new King();
                 this.CurrentCoin.Color = ChessColor.black;
             }
@@ -62,26 +74,21 @@ export class ChessCoinPlaceHolder implements OnInit {
                 this.CurrentCoin = new Bishop();
                 this.CurrentCoin.Color = ChessColor.white;
             }
-            else if (this.ChessCellPosition.Column == 4 ) {
+            else if (this.ChessCellPosition.Column == 4) {
                 this.CurrentCoin = new King();
                 this.CurrentCoin.Color = ChessColor.white;
             }
-            else if (this.ChessCellPosition.Column == 3 ) {
+            else if (this.ChessCellPosition.Column == 3) {
                 this.CurrentCoin = new Queen();
                 this.CurrentCoin.Color = ChessColor.white;
             }
         }
     }
 
-    CurrentCoin: ChessCoin;
+    OnClick(): void {
+        this._chessGameService.SelectCell(this);
+    };
 
-    @Input('ChessCellPosition')
-    ChessCellPosition: ChessPosition;
-
-    OnClick: () => void;
-    constructor() {
-
-    }
 };
 
-export default ChessCoinPlaceHolder;
+export default ChessboardCell;

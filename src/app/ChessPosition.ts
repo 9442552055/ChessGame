@@ -1,6 +1,6 @@
 import ChessColor from  './ChessColor'
 
-export default class ChessPosition {
+export class ChessPosition {
     Row: number;
     Column: number;
     constructor(row: number, column: number) {
@@ -11,3 +11,5 @@ export default class ChessPosition {
         return ((this.Row + this.Column) % 2) == 1 ? ChessColor.black : ChessColor.white;
     }
 }
+
+export default ChessPosition;

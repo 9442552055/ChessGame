@@ -10,6 +10,14 @@
      position: relative;
  }
  
+ .chess-coin {
+     cursor: pointer;
+ }
+ 
+ .chess-cell.selected {
+     color: green;
+ }
+ 
  .white .col-row-info,
  .black .col-row-info {
      font-size: x-small;

@@ -1,23 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { ChessboardComponent } from './chessboard.component';
-import { ChessCoinPlaceHolder } from './ChessCoinPlaceHolder';
-import { Solider } from './ChessCoins/Solider';
-import { Tower } from './ChessCoins/Tower';
-import { Horse } from './ChessCoins/Horse';
-import { Bishop } from './ChessCoins/Bishop';
-import { Queen } from './ChessCoins/Queen';
-import { King } from './ChessCoins/King';
+import { ChessboardComponent, ChessboardCell, ChessboardService } from './ChessBoard';
+
+import { Solider, Tower, Horse, Bishop, Queen, King } from './ChessCoins'
 
 @NgModule({
   declarations: [
-    ChessboardComponent, ChessCoinPlaceHolder, Solider, Tower, Horse, Bishop, Queen, King
+    ChessboardComponent, ChessboardCell, Solider, Tower, Horse, Bishop, Queen, King
   ],
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [ChessboardService],
   bootstrap: [ChessboardComponent]
 })
 export class ChessGame { }

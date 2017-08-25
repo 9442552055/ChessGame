@@ -1,7 +1,7 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { ChessGame } from './app/chessgame.module';
+import { ChessGame } from './app/Chessgame.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
