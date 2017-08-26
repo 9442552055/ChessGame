@@ -1,11 +1,12 @@
-<div class="chess-cell" [ngClass]="{'black' : ChessCellPosition.Color,'white':!ChessCellPosition.Color,'clear-both':!ChessCellPosition.Column, 'selected':IsSelected}" (click)="OnClick()">
+<div class="chess-cell" [ngClass]="{'black' : ChessCellPosition.Color,'white':!ChessCellPosition.Color,
+'clear-both':!ChessCellPosition.Column, 'selected':IsSelected, 'coin-shiftable':IsCoinShiftable}" (click)="OnClick()">
     <!-- {{CurrentCoin?CurrentCoin.Code:""}}-->
 
-    <solider class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='solider'" [Color]="CurrentCoin.Color"></solider>
-    <tower class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='tower'" [Color]="CurrentCoin.Color"></tower>
-    <horse class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='horse'" [Color]="CurrentCoin.Color"></horse>
-    <bishop class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='bishop'" [Color]="CurrentCoin.Color"></bishop>
-    <queen class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='queen'" [Color]="CurrentCoin.Color"></queen>
-    <king class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='king'" [Color]="CurrentCoin.Color"></king>
+    <solider class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='solider'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></solider>
+    <tower class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='tower'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></tower>
+    <horse class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='horse'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></horse>
+    <bishop class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='bishop'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></bishop>
+    <queen class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='queen'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></queen>
+    <king class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='king'" [Color]="CurrentCoin.Color" [ChessCellPosition]="ChessCellPosition"></king>
     <span class="col-row-info">{{ChessCellPosition.Row}},{{ChessCellPosition.Column}}</span>
 </div>

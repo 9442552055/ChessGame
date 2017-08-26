@@ -8,4 +8,6 @@ import { King } from './King';
 
 import AbstractChessCoin from './AbstractChessCoin';
 
-export { Solider, Tower, Horse, Bishop, Queen, King, AbstractChessCoin }
+import ChesscoinService from './ChesscoinService';
+
+export { Solider, Tower, Horse, Bishop, Queen, King, AbstractChessCoin, ChesscoinService }

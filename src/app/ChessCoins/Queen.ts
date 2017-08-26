@@ -1,7 +1,8 @@
 import { ChessPosition } from '../ChessPosition'
 import { AbstractChessCoin } from './AbstractChessCoin';
 
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { ChesscoinService } from "./ChesscoinService"; import { ChessboardService } from "../ChessBoard/ChessboardService";
 
 @Component({
     selector: 'queen',
@@ -9,9 +10,9 @@ import { Component } from '@angular/core';
 })
 export class Queen extends AbstractChessCoin {
     Name: String = "queen";
-    constructor() {
+    constructor(ChesscoinService: ChesscoinService,@Inject('ICoinShiftable') CoinShifter: ChessboardService) {
         //super( "queen", _color == ChessColor.black ? "&#9818;" : "&#9814;");
-        super();
+        super(ChesscoinService,CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
         throw new Error("Method not implemented.");

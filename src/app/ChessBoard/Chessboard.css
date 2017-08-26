@@ -1,8 +1,8 @@
  .chessboard {
-     width: 640px;
-     height: 640px;
+     width: 670px;
+     height: 670px;
      margin: 20px;
-     border: 25px solid #333;
+     border: 20px solid #333;
      margin: auto;
  }
  
@@ -16,6 +16,10 @@
  
  .chess-cell.selected {
      color: green;
+ }
+ 
+ .chess-cell.coin-shiftable {
+     border: 1.5px solid blue;
  }
  
  .white .col-row-info,
@@ -35,6 +39,7 @@
      text-align: center;
      display: table-cell;
      vertical-align: middle;
+     border: 1.5px solid transparent;
  }
  
  .white {
@@ -46,6 +51,7 @@
      text-align: center;
      display: table-cell;
      vertical-align: middle;
+     border: 1.5px solid transparent;
  }
  
  .clear-both {
