@@ -15,7 +15,10 @@ export class Tower extends AbstractChessCoin {
         super(ChesscoinService,CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
-        throw new Error("Method not implemented.");
+        //Full column front and back upto any coin/end
+        //Full row left and right upto any coin/end
+        //and moving this should not lead check to king
+        return [];
     }
 }
 export default Tower;

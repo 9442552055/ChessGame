@@ -15,7 +15,13 @@ export class Horse extends AbstractChessCoin {
         super(ChesscoinService,CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
-        throw new Error("Method not implemented.");
+       // throw new Error("Method not implemented.");
+       //add add 3,1 & 1,3 within boardlimits
+       //sub sub 3,1 & 1,3 within boardlimits
+       //add sub 3,1 & 1,3 within boardlimits
+       //sub add 3,1 & 1,3 within boardlimits
+       // moving this should cause check to king;
+       return [];
     }
 
 };

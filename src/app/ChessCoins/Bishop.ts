@@ -15,7 +15,12 @@ export class Bishop extends AbstractChessCoin {
         super(ChesscoinService,CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
-        throw new Error("Method not implemented.");
+         //Full left diagonal front upto any coin/end
+        //Full right diagonal front upto any coin/end
+        //Full left diagonal back upto any coin/end
+        //Full right diagonal back upto any coin/end
+        //and moving this should not lead check to king
+        return [];
     }
 
 };

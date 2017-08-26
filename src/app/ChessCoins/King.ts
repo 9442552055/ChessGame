@@ -15,7 +15,14 @@ export class King extends AbstractChessCoin {
         super(ChesscoinService,CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
-        throw new Error("Method not implemented.");
+        //one step in all eight directions with board limits
+        //add   row col  - sub row col
+        //0     0   0    -  1   0   0
+        //0     0   1    -  1   0   1
+        //0     1   0    -  1   1   0
+        //0     1   1    -  1   1   1
+        //it should make check the same[this king]
+        return [];
     }
 }
 
