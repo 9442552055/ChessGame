@@ -19,26 +19,11 @@ export class Tower extends AbstractChessCoin {
         //Full row left and right upto any coin/end
         //and moving this should not lead check to king
         var places = [];
-        var addPositions = function (ChesscoinService, MyColor) {
-            return function (p: ChessPosition, type: string, val: number) {
-                if ((p[type] < 7 && val == 1) || (val == -1 && p[type] > 0)) {
-                    var newP = { ...p };
-                    newP[type] = newP[type] + val;
-                    var coinInPath = ChesscoinService.GetCoinIfExists(newP);
-                    if (!coinInPath) {
-                        places.push(newP);
-                        addPositions(newP, type, val);
-                    }
-                    else if (coinInPath.Color != MyColor) {
-                        places.push(newP);
-                    }
-                }
-            }
-        }(this.__chesscoinService, this.Color);
-        addPositions(this.ChessCellPosition, "Row", 1)
-        addPositions(this.ChessCellPosition, "Row", -1)
-        addPositions(this.ChessCellPosition, "Column", 1)
-        addPositions(this.ChessCellPosition, "Column", -1)
+        
+        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", -1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", -1,this.Color,places)
         return places;
     }
 }

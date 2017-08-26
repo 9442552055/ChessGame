@@ -10,18 +10,29 @@ import { ChesscoinService } from "./ChesscoinService"; import { ChessboardServic
 })
 export class Horse extends AbstractChessCoin {
     Name: String = "horse";
-    constructor(ChesscoinService: ChesscoinService,@Inject('ICoinShiftable') CoinShifter: ChessboardService) {
+    constructor(ChesscoinService: ChesscoinService, @Inject('ICoinShiftable') CoinShifter: ChessboardService) {
         //super( "horse", _color == ChessColor.black ? "&#9822;" : "&#9816;");
-        super(ChesscoinService,CoinShifter);
+        super(ChesscoinService, CoinShifter);
     }
     GetShiftablePlaces(): ChessPosition[] {
-       // throw new Error("Method not implemented.");
-       //add add 3,1 & 1,3 within boardlimits
-       //sub sub 3,1 & 1,3 within boardlimits
-       //add sub 3,1 & 1,3 within boardlimits
-       //sub add 3,1 & 1,3 within boardlimits
-       // moving this should cause check to king;
-       return [];
+        // throw new Error("Method not implemented.");
+        //add add 2,1 & 1,2 within boardlimits
+        //sub sub 2,1 & 1,2 within boardlimits
+        //add sub 2,1 & 1,2 within boardlimits
+        //sub add 2,1 & 1,2 within boardlimits
+        // moving this should cause check to king;
+        var places = []
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 1, 2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -1, -2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -1, 2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 1, -2, this.Color, places)
+
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 2, 1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -2, -1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -2, 1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 2, -1, this.Color, places)
+        //and moving this should not lead check to king
+        return places;
     }
 
 };

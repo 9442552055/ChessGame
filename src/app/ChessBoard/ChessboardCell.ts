@@ -86,12 +86,12 @@ export class ChessboardCell implements OnInit {
                 this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
             }
             else if (this.ChessCellPosition.Column == 4) {
-                this.CurrentCoin = new King(null, null);
+                this.CurrentCoin = new Queen(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
                 this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
             }
             else if (this.ChessCellPosition.Column == 3) {
-                this.CurrentCoin = new Queen(null, null);
+                this.CurrentCoin = new King(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
                 this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
             }
