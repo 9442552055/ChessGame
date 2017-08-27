@@ -188,7 +188,7 @@ export class ChesscoinService {
             return false;
         }
         // have to check is opponent horses positions cause check
-        if (!this.__checkJumperPlaces(coinP, -1, 2, coinColor)) {
+        if (!this.__checkJumperPlaces(coinP, 1, 2, coinColor)) {
             return false;
         }
         if (!this.__checkJumperPlaces(coinP, -1, -2, coinColor)) {
