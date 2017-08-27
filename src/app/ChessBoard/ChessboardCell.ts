@@ -21,6 +21,7 @@ export class ChessboardCell implements OnInit {
 
     IsSelected: boolean;
     IsCoinShiftable: boolean;
+    IsCoinLocked: boolean;
 
     @Input('ChessCellPosition')
     ChessCellPosition: ChessPosition;

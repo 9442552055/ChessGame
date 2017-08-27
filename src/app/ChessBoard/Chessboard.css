@@ -22,6 +22,10 @@
      border: 1.5px solid blue;
  }
  
+ .chess-cell.coin-locked {
+     border: 1.5px solid red;
+ }
+ 
  .white .col-row-info,
  .black .col-row-info {
      font-size: x-small;

@@ -38,22 +38,33 @@ export class ChessboardService implements ICoinShiftable {
         }
     }
 
-    SelectCell(cellToSelect: any): void {
+    SelectCell(cellToSelect: ChessboardCell): void {
         if (Object.getOwnPropertyNames(this.__selectedCell).length) { //Already coin choosen to move
 
             if (!this.__chessBoardCells[cellToSelect.ChessCellPosition.Row][cellToSelect.ChessCellPosition.Column].IsCoinShiftable) {
                 return;
             }
-            this.__selectedCell.IsSelected = false;
-            //this.__selectedCell = cellToSelect;
-            if (cellToSelect.CurrentCoin) {
-                this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
+            var moved = this.__selectedCell.CurrentCoin.MoveTo(cellToSelect.ChessCellPosition);
+            if (moved) {
+                this.__selectedCell.IsSelected = false;
+                if (cellToSelect.CurrentCoin) {
+                    this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
+                }
+                cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
+                this.__selectedCell.CurrentCoin = null;
+                this.__switchTurn(this.__turnIsWith);
             }
-            cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
-            cellToSelect.CurrentCoin.ChessCoinPosition.Row = cellToSelect.ChessCellPosition.Row;
-            cellToSelect.CurrentCoin.ChessCoinPosition.Column = cellToSelect.ChessCellPosition.Column;
-            this.__selectedCell.CurrentCoin = null;
-            this.__switchTurn(this.__turnIsWith);
+            else{
+                this.__selectedCell.IsCoinLocked = true;
+            }
+            //this.__selectedCell.IsSelected = false;
+            // if (cellToSelect.CurrentCoin) {
+            //     this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
+            // }
+            // cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
+            // cellToSelect.CurrentCoin.MoveTo(cellToSelect.ChessCellPosition);
+            //this.__selectedCell.CurrentCoin = null;
+            //this.__switchTurn(this.__turnIsWith);
         }
         else if (cellToSelect.CurrentCoin && this.__turnIsWith == cellToSelect.CurrentCoin.Color) { // Coin selection to move
             this.__selectedCell.IsSelected = false;
@@ -64,9 +75,10 @@ export class ChessboardService implements ICoinShiftable {
 
     }
 
-    UnSelectCell(cellToUnselect: any): void {
+    UnSelectCell(cellToUnselect: ChessboardCell): void {
         this.__clearPlacesToMove();
         cellToUnselect.IsSelected = false;
+        cellToUnselect.IsCoinLocked = false;
         this.__selectedCell = {}
     }
 

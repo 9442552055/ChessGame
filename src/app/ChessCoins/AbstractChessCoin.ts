@@ -17,6 +17,7 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
 
     protected __chesscoinService: ChesscoinService;
     protected __coinShifter: ICoinShiftable;
+    private __oldPosition: ChessPosition;
 
     abstract Name: String;
     __id: number;
@@ -26,19 +27,31 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
         this.__coinShifter = coinShifter;
     }
     ngOnInit(): void {
-        console.log(this);
+        //console.log(this);
         this.__chesscoinService.AddChessCoin(this);
         this.__coinShifter.UpdateCoinMove(this);
     }
 
     ngOnDestroy(): void {
-        this.__chesscoinService.RemoveChessCoin(this);
+        this.__chesscoinService.RemoveChessCoin(this, this.__oldPosition);
     }
 
     abstract GetShiftablePlaces(): ChessPosition[];
 
-    MoveToPosition(chessCoinPosition: ChessPosition){
-        this.ChessCoinPosition = chessCoinPosition;
+    MoveTo(chessCoinPosition: ChessPosition): boolean {
+        this.__oldPosition = { ...this.ChessCoinPosition };
+        this.ChessCoinPosition.Row = chessCoinPosition.Row;
+        this.ChessCoinPosition.Column = chessCoinPosition.Column;
+        //TODO: Check if king has problem in this move, if so revert and return false
+        if (!this.__chesscoinService.IsKingSafe(this.Color)) {
+            this.ChessCoinPosition.Row = this.__oldPosition.Row;
+            this.ChessCoinPosition.Column = this.__oldPosition.Column;
+            return false;
+        }
+        if(!this.__chesscoinService.IsOtherKingSafe(this.Color)){
+            alert("Check !!!");
+        }
+        return true;
     }
 }
 

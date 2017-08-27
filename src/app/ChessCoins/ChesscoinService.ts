@@ -7,19 +7,35 @@ import { AbstractChessCoin } from "./AbstractChessCoin";
 @Injectable()
 export class ChesscoinService {
     private __chesscoins: AbstractChessCoin[] = [];
-
+    private __coinsHash: any = {};
+    private __kings: any = {}
 
     AddChessCoin(coin: AbstractChessCoin): void {
         this.__chesscoins.push(coin);
+        if (!this.__coinsHash[coin.ChessCoinPosition.Row]) {
+            this.__coinsHash[coin.ChessCoinPosition.Row] = {};
+        }
+        this.__coinsHash[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column] = coin;
+        if (coin.Name == 'king') {
+            this.__kings[coin.Color] = coin;
+        }
     }
 
-    RemoveChessCoin(coin: AbstractChessCoin): void {
+    RemoveChessCoin(coin: AbstractChessCoin, oldPosition: ChessPosition): void {
+        this.__coinsHash[oldPosition.Row][oldPosition.Column] = undefined;
         for (var a = 0; a < this.__chesscoins.length; a++) {
-            if (this.__chesscoins[a].__id == coin.__id) {
+            if (this.__chesscoins[a].ChessCoinPosition.Row == coin.ChessCoinPosition.Row
+                && this.__chesscoins[a].ChessCoinPosition.Column == coin.ChessCoinPosition.Column) {
                 this.__chesscoins.splice(a, 1);
                 return;
             }
+
+            // if (this.__chesscoins[a].__id == coin.__id) {
+            //     this.__chesscoins.splice(a, 1);
+            //     return;
+            // }
         }
+
     }
 
     GetCoinIfExists(position: ChessPosition): AbstractChessCoin {
@@ -29,6 +45,7 @@ export class ChesscoinService {
                 return this.__chesscoins[a];
             }
         }
+        // return this.__coinsHash[position.Row] ? this.__coinsHash[position.Row][position.Column] : undefined;
     }
 
     AddLinearMovements(p: ChessPosition, type: string, val: number, MyColor: ChessColor, places: ChessPosition[]): void {
@@ -106,10 +123,10 @@ export class ChesscoinService {
         this.AddDiagonalMovements(p, row, col, coinColor, places)
         if (places.length) {
             var opponentcoin = this.GetCoinIfExists(places[places.length - 1]);
-            if (opponentcoin.Name == 'bishop' || opponentcoin.Name == 'queen') {
+            if (opponentcoin && (opponentcoin.Name == 'bishop' || opponentcoin.Name == 'queen')) {
                 return false;
             }
-            if (opponentcoin.Name == 'solider' || opponentcoin.Name == 'king' && places.length == 1) {
+            if (opponentcoin && (opponentcoin.Name == 'solider' || opponentcoin.Name == 'king' && places.length == 1)) {
                 return false;
             }
         }
@@ -121,10 +138,10 @@ export class ChesscoinService {
         this.AddLinearMovements(p, type, val, coinColor, places)
         if (places.length) {
             var opponentcoin = this.GetCoinIfExists(places[places.length - 1]);
-            if (opponentcoin.Name == 'tower' || opponentcoin.Name == 'queen') {
+            if (opponentcoin && (opponentcoin.Name == 'tower' || opponentcoin.Name == 'queen')) {
                 return false;
             }
-            if (opponentcoin.Name == 'king' && places.length == 1) {
+            if (opponentcoin && (opponentcoin.Name == 'king' && places.length == 1)) {
                 return false;
             }
         }
@@ -136,14 +153,14 @@ export class ChesscoinService {
         this.AddJumpMovements(p, val1, val2, color, places)
         if (places.length) {
             var opponentcoin = this.GetCoinIfExists(places[places.length - 1]);
-            if (opponentcoin.Name == 'horse') {
+            if (opponentcoin && opponentcoin.Name == 'horse') {
                 return false;
             }
         }
         return true;
     }
 
-    IsCoinSafe(coinP: ChessPosition, coinColor: ChessColor): boolean {
+    __isCoinSafe(coinP: ChessPosition, coinColor: ChessColor): boolean {
         //TODO: think of parallel executions
         //is our king 8 directions open 
         if (!this.__checkDiagonalPlaces(coinP, coinColor, 1, 1)) {
@@ -197,6 +214,28 @@ export class ChesscoinService {
             return false;
         }
         return true;
+    }
+
+    IsKingSafe(coinColor: ChessColor): boolean {
+
+        if (this.__kings && this.__kings[coinColor]) {
+            return this.__isCoinSafe(this.__kings[coinColor].ChessCoinPosition, coinColor);
+        }
+        return false;
+    }
+
+    IsOtherKingSafe(coinColor: ChessColor): boolean {
+        var temp: AbstractChessCoin[] = [];
+        for (var key in this.__kings) {
+            temp.push(this.__kings[key]);
+        }
+        for (var a = 0; a < temp.length; a++) {
+            if (temp[a].Color != coinColor) {
+                return this.__isCoinSafe(temp[a].ChessCoinPosition, temp[a].Color);
+            }
+        }
+
+        return false;
     }
 }
 

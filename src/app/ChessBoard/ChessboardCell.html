@@ -1,5 +1,5 @@
 <div class="chess-cell" [ngClass]="{'black' : ChessCellPosition.Color,'white':!ChessCellPosition.Color,
-'clear-both':!ChessCellPosition.Column, 'selected':IsSelected, 'coin-shiftable':IsCoinShiftable}" (click)="OnClick()">
+'clear-both':!ChessCellPosition.Column, 'selected':IsSelected, 'coin-shiftable':IsCoinShiftable,'coin-locked':IsCoinLocked}" (click)="OnClick()">
     <!-- {{CurrentCoin?CurrentCoin.Code:""}}-->
 
     <solider class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='solider'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></solider>
