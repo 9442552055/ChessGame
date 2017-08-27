@@ -21,8 +21,8 @@ export class King extends AbstractChessCoin {
         //0     0   1    -  1   0   1
         //0     1   0    -  1   1   0
         //0     1   1    -  1   1   1
+        return this.__chesscoinService.GetKingsMovements(this.ChessCellPosition,this.Color);
         //it should make check the same[this king]
-        return [];
     }
 }
 
