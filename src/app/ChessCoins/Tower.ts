@@ -20,10 +20,10 @@ export class Tower extends AbstractChessCoin {
         //and moving this should not lead check to king
         var places = [];
         
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", 1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", -1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", 1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", -1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Row", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Row", -1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Column", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Column", -1,this.Color,places)
         return places;
     }
 }

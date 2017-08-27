@@ -28,33 +28,33 @@ export class Solider extends AbstractChessCoin {
             }
         }(this.__chesscoinService);
         var GetPositionByColorOperation = (p: AbstractChessCoin, val: number): ChessPosition => {
-            return p.Color == ChessColor.black ? new ChessPosition(p.ChessCellPosition.Row + val, p.ChessCellPosition.Column) : new ChessPosition(p.ChessCellPosition.Row - val, p.ChessCellPosition.Column);
+            return p.Color == ChessColor.black ? new ChessPosition(p.ChessCoinPosition.Row + val, p.ChessCoinPosition.Column) : new ChessPosition(p.ChessCoinPosition.Row - val, p.ChessCoinPosition.Column);
         }
         var CoinInPath: AbstractChessCoin = null;
         if (this.Color == ChessColor.black) {
-            if (this.ChessCellPosition.Row < 7) {
+            if (this.ChessCoinPosition.Row < 7) {
                 var p1 = GetPositionByColorOperation(this, 1);
                 CoinInPath = addIfNoCoin(p1)
             }
-            if (this.ChessCellPosition.Row == 1 && !CoinInPath) {
+            if (this.ChessCoinPosition.Row == 1 && !CoinInPath) {
                 var p2 = GetPositionByColorOperation(this, 2);
                 CoinInPath = addIfNoCoin(p2);
             }
         }
         else {
-            if (this.ChessCellPosition.Row > 0) {
+            if (this.ChessCoinPosition.Row > 0) {
                 var p3 = GetPositionByColorOperation(this, 1);
                 CoinInPath = addIfNoCoin(p3)
             }
-            if (this.ChessCellPosition.Row == 6 && !CoinInPath) {
+            if (this.ChessCoinPosition.Row == 6 && !CoinInPath) {
                 var p4 = GetPositionByColorOperation(this, 2);
                 CoinInPath = addIfNoCoin(p4)
             }
         }
         //###### 2. One step cross line if opponent coin exits
         //Check not exceed board limit up/down
-        if ((this.Color == ChessColor.black && this.ChessCellPosition.Row < 7)
-            || (this.Color == ChessColor.white && this.ChessCellPosition.Row > 0)) {
+        if ((this.Color == ChessColor.black && this.ChessCoinPosition.Row < 7)
+            || (this.Color == ChessColor.white && this.ChessCoinPosition.Row > 0)) {
             var p5 = GetPositionByColorOperation(this, 1);
             //right
             //Check not exceed board limit right

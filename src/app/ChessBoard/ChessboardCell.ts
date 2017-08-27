@@ -36,64 +36,65 @@ export class ChessboardCell implements OnInit {
             if (this.ChessCellPosition.Column == 0 || this.ChessCellPosition.Column == 7) {
                 this.CurrentCoin = new Tower(null, null);
                 this.CurrentCoin.Color = ChessColor.black;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
+                
             }
             else if (this.ChessCellPosition.Column == 1 || this.ChessCellPosition.Column == 6) {
                 this.CurrentCoin = new Horse(null, null);
                 this.CurrentCoin.Color = ChessColor.black;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 2 || this.ChessCellPosition.Column == 5) {
                 this.CurrentCoin = new Bishop(null, null);
                 this.CurrentCoin.Color = ChessColor.black;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 4) {
                 this.CurrentCoin = new Queen(null, null);
                 this.CurrentCoin.Color = ChessColor.black;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 3) {
                 this.CurrentCoin = new King(null, null);
                 this.CurrentCoin.Color = ChessColor.black;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
         }
         else if (this.ChessCellPosition.Row == 1) {
             this.CurrentCoin = new Solider(null, null);
             this.CurrentCoin.Color = ChessColor.black;
-            this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+             this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
         }
         else if (this.ChessCellPosition.Row == 6) {
             this.CurrentCoin = new Solider(null, null);
             this.CurrentCoin.Color = ChessColor.white;
-            this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+             this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
         }
         else if (this.ChessCellPosition.Row == 7) {
             if (this.ChessCellPosition.Column == 0 || this.ChessCellPosition.Column == 7) {
                 this.CurrentCoin = new Tower(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 1 || this.ChessCellPosition.Column == 6) {
                 this.CurrentCoin = new Horse(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 2 || this.ChessCellPosition.Column == 5) {
                 this.CurrentCoin = new Bishop(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 4) {
                 this.CurrentCoin = new Queen(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
             else if (this.ChessCellPosition.Column == 3) {
                 this.CurrentCoin = new King(null, null);
                 this.CurrentCoin.Color = ChessColor.white;
-                this.CurrentCoin.ChessCellPosition = this.ChessCellPosition;
+                this.CurrentCoin.ChessCoinPosition=new ChessPosition(this.ChessCellPosition.Row,this.ChessCellPosition.Column)
             }
         }
         this.__chessGameService.AddPlaceHolder(this);

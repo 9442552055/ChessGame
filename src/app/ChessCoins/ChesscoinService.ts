@@ -24,8 +24,8 @@ export class ChesscoinService {
 
     GetCoinIfExists(position: ChessPosition): AbstractChessCoin {
         for (var a = 0; a < this.__chesscoins.length; a++) {
-            if (this.__chesscoins[a].ChessCellPosition.Row == position.Row
-                && this.__chesscoins[a].ChessCellPosition.Column == position.Column) {
+            if (this.__chesscoins[a].ChessCoinPosition.Row == position.Row
+                && this.__chesscoins[a].ChessCoinPosition.Column == position.Column) {
                 return this.__chesscoins[a];
             }
         }

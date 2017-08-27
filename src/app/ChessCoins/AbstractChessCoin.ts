@@ -12,8 +12,8 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
     @Input('Color')
     Color: ChessColor;
 
-    @Input('ChessCellPosition')
-    ChessCellPosition: ChessPosition;
+    @Input('ChessCoinPosition')
+    ChessCoinPosition: ChessPosition;
 
     protected __chesscoinService: ChesscoinService;
     protected __coinShifter: ICoinShiftable;
@@ -36,6 +36,10 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
     }
 
     abstract GetShiftablePlaces(): ChessPosition[];
+
+    MoveToPosition(chessCoinPosition: ChessPosition){
+        this.ChessCoinPosition = chessCoinPosition;
+    }
 }
 
 

@@ -21,10 +21,10 @@ export class Bishop extends AbstractChessCoin {
         //Full right diagonal back upto any coin/end
         //and moving this should not lead check to king
         var places = [];
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, 1, 1, this.Color, places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, -1, -1, this.Color, places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, -1, 1, this.Color, places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, 1, -1, this.Color, places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, 1, 1, this.Color, places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, -1, -1, this.Color, places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, -1, 1, this.Color, places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, 1, -1, this.Color, places)
         //and moving this should not lead check to king
         return places;
     }

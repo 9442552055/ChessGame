@@ -22,15 +22,15 @@ export class Horse extends AbstractChessCoin {
         //sub add 2,1 & 1,2 within boardlimits
         // moving this should cause check to king;
         var places = []
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 1, 2, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -1, -2, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -1, 2, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 1, -2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, 1, 2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, -1, -2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, -1, 2, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, 1, -2, this.Color, places)
 
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 2, 1, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -2, -1, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, -2, 1, this.Color, places)
-        this.__chesscoinService.AddJumpMovements(this.ChessCellPosition, 2, -1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, 2, 1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, -2, -1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, -2, 1, this.Color, places)
+        this.__chesscoinService.AddJumpMovements(this.ChessCoinPosition, 2, -1, this.Color, places)
         //and moving this should not lead check to king
         return places;
     }

@@ -50,7 +50,8 @@ export class ChessboardService implements ICoinShiftable {
                 this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
             }
             cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
-            cellToSelect.CurrentCoin.ChessCellPosition = cellToSelect.ChessCellPosition;
+            cellToSelect.CurrentCoin.ChessCoinPosition.Row = cellToSelect.ChessCellPosition.Row;
+            cellToSelect.CurrentCoin.ChessCoinPosition.Column = cellToSelect.ChessCellPosition.Column;
             this.__selectedCell.CurrentCoin = null;
             this.__switchTurn(this.__turnIsWith);
         }
@@ -70,7 +71,7 @@ export class ChessboardService implements ICoinShiftable {
     }
 
     UpdateCoinMove(coin: any): void {
-        this.__chessBoardCells[coin.ChessCellPosition.Row][coin.ChessCellPosition.Column].CurrentCoin = coin;
+        this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].CurrentCoin = coin;
     }
 
 

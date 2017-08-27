@@ -19,19 +19,19 @@ export class Queen extends AbstractChessCoin {
         //Full row left and right upto any coin/end
          var places = [];
         
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", 1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Row", -1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", 1,this.Color,places)
-        this.__chesscoinService.AddLinearMovements(this.ChessCellPosition, "Column", -1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Row", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Row", -1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Column", 1,this.Color,places)
+        this.__chesscoinService.AddLinearMovements(this.ChessCoinPosition, "Column", -1,this.Color,places)
         //Full left diagonal front upto any coin/end
         //Full right diagonal front upto any coin/end
         //Full left diagonal back upto any coin/end
         //Full right diagonal back upto any coin/end
         
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, 1, 1,this.Color,places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, -1, -1,this.Color,places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, -1, 1,this.Color,places)
-        this.__chesscoinService.AddDiagonalMovements(this.ChessCellPosition, 1, -1,this.Color,places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, 1, 1,this.Color,places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, -1, -1,this.Color,places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, -1, 1,this.Color,places)
+        this.__chesscoinService.AddDiagonalMovements(this.ChessCoinPosition, 1, -1,this.Color,places)
         //and moving this should not lead check to king
         return places;
     }
