@@ -10,13 +10,7 @@ export class ChessboardService implements ICoinShiftable {
     private __positionsToMove: ChessPosition[];
     private __removedCoins = [];
 
-    AddPlaceHolder(placeHolder: ChessboardCell): void {
-        if (!this.__chessBoardCells[placeHolder.ChessCellPosition.Row]) {
-            this.__chessBoardCells[placeHolder.ChessCellPosition.Row] = [];
-        }
-        this.__chessBoardCells[placeHolder.ChessCellPosition.Row][placeHolder.ChessCellPosition.Column] = placeHolder;
-    }
-    __clearPlacesToMove = (): void => {
+    private __clearPlacesToMove = (): void => {
         for (var a = 0; a < this.__positionsToMove.length; a++) {
             this.__chessBoardCells[this.__positionsToMove[a].Row][this.__positionsToMove[a].Column].IsCoinShiftable = false;
             //this.__chessBoardCells[this.__positionsToMove[a].Row][this.__positionsToMove[a].Column].ChangeDetector.detectChanges();
@@ -24,17 +18,24 @@ export class ChessboardService implements ICoinShiftable {
         this.__positionsToMove = [];
     }
 
-    __switchTurn = (color: ChessColor): void => {
+    private __switchTurn = (color: ChessColor): void => {
         this.__turnIsWith = color == ChessColor.white ? ChessColor.black : ChessColor.white;
         this.__selectedCell = undefined;
         this.__clearPlacesToMove();
     }
 
-    __setPlacesToMove = (selectedCell: ChessboardCell): void => {
+    private __setPlacesToMove = (selectedCell: ChessboardCell): void => {
         this.__positionsToMove = selectedCell.CurrentCoin.GetShiftablePlaces();
         for (var a = 0; a < this.__positionsToMove.length; a++) {
             this.__chessBoardCells[this.__positionsToMove[a].Row][this.__positionsToMove[a].Column].IsCoinShiftable = true;
         }
+    }
+
+    AddPlaceHolder(placeHolder: ChessboardCell): void {
+        if (!this.__chessBoardCells[placeHolder.ChessCellPosition.Row]) {
+            this.__chessBoardCells[placeHolder.ChessCellPosition.Row] = [];
+        }
+        this.__chessBoardCells[placeHolder.ChessCellPosition.Row][placeHolder.ChessCellPosition.Column] = placeHolder;
     }
 
     SelectCell(cellToSelect: ChessboardCell): void {

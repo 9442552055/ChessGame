@@ -1,9 +1,9 @@
 <div class="chessboard">
     <div class="clear-both chess-row" *ngFor="let rowCells of PlaceHolders">
         <div class="chess-cell" *ngFor="let cellPlaceHolder of rowCells">
-            <chess-coin-placeholder [ChessCellPosition]="cellPlaceHolder">
+            <chessboard-cell [ChessCellPosition]="cellPlaceHolder">
 
-            </chess-coin-placeholder>
+            </chessboard-cell>
         </div>
     </div>
 </div>

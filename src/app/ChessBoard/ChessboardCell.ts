@@ -6,7 +6,7 @@ import { AbstractChessCoin, ChessColor, ChessPosition, IChessboardCell, ICoinIni
 import ChessboardService from "./ChessboardService";
 
 @Component({
-    selector: 'chess-coin-placeholder',
+    selector: 'chessboard-cell',
     templateUrl: './ChessboardCell.html',
     styleUrls: ['./Chessboard.css'],
     //changeDetection: ChangeDetectionStrategy.Default,

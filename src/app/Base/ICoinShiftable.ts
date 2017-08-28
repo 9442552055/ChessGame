@@ -1,6 +1,7 @@
-// import { Injectable } from '@angular/core';
-// @Injectable()
+
+import { AbstractChessCoin } from "./AbstractChessCoin";
+
 export interface ICoinShiftable {
-    UpdateCoinMove(coin: any): void;
+    UpdateCoinMove(coin: AbstractChessCoin): void;
 }
 export default ICoinShiftable;

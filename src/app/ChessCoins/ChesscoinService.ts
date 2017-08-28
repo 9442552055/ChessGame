@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService } from '../Base';
 
-
-
 @Injectable()
 export class ChesscoinService implements IChesscoinService {
     private __chesscoins: AbstractChessCoin[] = [];
@@ -29,12 +27,11 @@ export class ChesscoinService implements IChesscoinService {
                 return;
             }
 
-            // if (this.__chesscoins[a].__id == coin.__id) {
+            // if (this.__chesscoins[a].__id == coin.__id) { //id search cause wierd results dont know why
             //     this.__chesscoins.splice(a, 1);
             //     return;
             // }
         }
-
     }
 
     GetCoinIfExists(position: ChessPosition): AbstractChessCoin {
@@ -44,6 +41,7 @@ export class ChesscoinService implements IChesscoinService {
                 return this.__chesscoins[a];
             }
         }
+        return undefined;
         // return this.__coinsHash[position.Row] ? this.__coinsHash[position.Row][position.Column] : undefined;
     }
 
@@ -60,7 +58,6 @@ export class ChesscoinService implements IChesscoinService {
                 places.push(newP);
             }
         }
-
     }
 
     AddDiagonalMovements(p: ChessPosition, row: number, col: number, MyColor: ChessColor, places: ChessPosition[]): void {
@@ -117,7 +114,7 @@ export class ChesscoinService implements IChesscoinService {
         return places;
     }
 
-    __checkDiagonalPlaces(p: ChessPosition, coinColor: ChessColor, row: number, col: number): boolean {
+    private __checkDiagonalPlaces(p: ChessPosition, coinColor: ChessColor, row: number, col: number): boolean {
         var places: ChessPosition[] = [];
         this.AddDiagonalMovements(p, row, col, coinColor, places)
         if (places.length) {
@@ -132,7 +129,7 @@ export class ChesscoinService implements IChesscoinService {
         return true;
     }
 
-    __checkLinearPlaces(p: ChessPosition, type: string, val: number, coinColor: ChessColor, ): boolean {
+    private __checkLinearPlaces(p: ChessPosition, type: string, val: number, coinColor: ChessColor, ): boolean {
         var places: ChessPosition[] = [];
         this.AddLinearMovements(p, type, val, coinColor, places)
         if (places.length) {
@@ -147,7 +144,7 @@ export class ChesscoinService implements IChesscoinService {
         return true;
     }
 
-    __checkJumperPlaces(p: ChessPosition, val1: number, val2: number, color: ChessColor): boolean {
+    private __checkJumperPlaces(p: ChessPosition, val1: number, val2: number, color: ChessColor): boolean {
         var places = []
         this.AddJumpMovements(p, val1, val2, color, places)
         if (places.length) {
@@ -159,7 +156,7 @@ export class ChesscoinService implements IChesscoinService {
         return true;
     }
 
-    __isCoinSafe(coinP: ChessPosition, coinColor: ChessColor): boolean {
+    private __isCoinSafe(coinP: ChessPosition, coinColor: ChessColor): boolean {
         //TODO: think of parallel executions
         //is our king 8 directions open 
         if (!this.__checkDiagonalPlaces(coinP, coinColor, 1, 1)) {
