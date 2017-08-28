@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Input, OnInit, Inject/*, ChangeDetectorRef, ChangeDetectionStrategy*/ } from '@angular/core';
 import { AbstractChessCoin, ChessColor, ChessPosition, IChessboardCell, ICoinInitializer } from "../Base";
 
 
@@ -8,8 +8,8 @@ import ChessboardService from "./ChessboardService";
 @Component({
     selector: 'chess-coin-placeholder',
     templateUrl: './ChessboardCell.html',
-    //inputs:['ChessCellPosition']
-    styleUrls: ['./Chessboard.css']
+    styleUrls: ['./Chessboard.css'],
+    //changeDetection: ChangeDetectionStrategy.Default,
 })
 export class ChessboardCell implements OnInit, IChessboardCell {
 
@@ -23,9 +23,13 @@ export class ChessboardCell implements OnInit, IChessboardCell {
     ChessCellPosition: ChessPosition;
     private __chessGameService: ChessboardService;
     private __coinInitializer: ICoinInitializer;
-    constructor( @Inject('ChessboardService') ChessboardService: ChessboardService, @Inject('ICoinInitializer') coinInitializer: ICoinInitializer) {
+    //ChangeDetector: ChangeDetectorRef;
+    constructor( @Inject('ChessboardService') private ChessboardService: ChessboardService,
+        @Inject('ICoinInitializer') private coinInitializer: ICoinInitializer){
+        //,changeDetectorRef: ChangeDetectorRef) {
         this.__chessGameService = ChessboardService;
         this.__coinInitializer = coinInitializer;
+        //this.ChangeDetector = changeDetectorRef;
     }
 
     ngOnInit(): void {

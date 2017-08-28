@@ -6,22 +6,22 @@ import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService } from 
 @Injectable()
 export class ChesscoinService implements IChesscoinService {
     private __chesscoins: AbstractChessCoin[] = [];
-    private __coinsHash: any = {};
+    //private __coinsHash: any = {};
     private __kings: any = {}
 
     AddChessCoin(coin: AbstractChessCoin): void {
         this.__chesscoins.push(coin);
-        if (!this.__coinsHash[coin.ChessCoinPosition.Row]) {
-            this.__coinsHash[coin.ChessCoinPosition.Row] = {};
-        }
-        this.__coinsHash[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column] = coin;
+        // if (!this.__coinsHash[coin.ChessCoinPosition.Row]) {
+        //     this.__coinsHash[coin.ChessCoinPosition.Row] = {};
+        // }
+        // this.__coinsHash[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column] = coin;
         if (coin.Name == 'king') {
             this.__kings[coin.Color] = coin;
         }
     }
 
     RemoveChessCoin(coin: AbstractChessCoin, oldPosition: ChessPosition): void {
-        this.__coinsHash[oldPosition.Row][oldPosition.Column] = undefined;
+        //this.__coinsHash[oldPosition.Row][oldPosition.Column] = undefined;
         for (var a = 0; a < this.__chesscoins.length; a++) {
             if (this.__chesscoins[a].ChessCoinPosition.Row == coin.ChessCoinPosition.Row
                 && this.__chesscoins[a].ChessCoinPosition.Column == coin.ChessCoinPosition.Column) {

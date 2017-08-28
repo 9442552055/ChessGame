@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ChangeDetectorRef } from '@angular/core';
 import { ChessColor, ICoinShiftable, ChessPosition, AbstractChessCoin } from '../Base';
 import { ChessboardCell } from "./ChessboardCell";
 
 @Injectable()
 export class ChessboardService implements ICoinShiftable {
     private __chessBoardCells: ChessboardCell[][] = [];
-    private __selectedCell: any = {};
+    private __selectedCell: ChessboardCell;
     private __turnIsWith: ChessColor = ChessColor.white;
     private __positionsToMove: ChessPosition[];
     private __removedCoins = [];
@@ -19,13 +19,14 @@ export class ChessboardService implements ICoinShiftable {
     __clearPlacesToMove = (): void => {
         for (var a = 0; a < this.__positionsToMove.length; a++) {
             this.__chessBoardCells[this.__positionsToMove[a].Row][this.__positionsToMove[a].Column].IsCoinShiftable = false;
+            //this.__chessBoardCells[this.__positionsToMove[a].Row][this.__positionsToMove[a].Column].ChangeDetector.detectChanges();
         }
         this.__positionsToMove = [];
     }
 
     __switchTurn = (color: ChessColor): void => {
         this.__turnIsWith = color == ChessColor.white ? ChessColor.black : ChessColor.white;
-        this.__selectedCell = {};
+        this.__selectedCell = undefined;
         this.__clearPlacesToMove();
     }
 
@@ -37,7 +38,7 @@ export class ChessboardService implements ICoinShiftable {
     }
 
     SelectCell(cellToSelect: ChessboardCell): void {
-        if (Object.getOwnPropertyNames(this.__selectedCell).length) { //Already coin choosen to move
+        if (this.__selectedCell && Object.getOwnPropertyNames(this.__selectedCell).length) { //Already coin choosen to move
 
             if (!this.__chessBoardCells[cellToSelect.ChessCellPosition.Row][cellToSelect.ChessCellPosition.Column].IsCoinShiftable) {
                 return;
@@ -49,10 +50,10 @@ export class ChessboardService implements ICoinShiftable {
                     this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
                 }
                 cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
-                this.__selectedCell.CurrentCoin = null;
+                this.__selectedCell.CurrentCoin = undefined;
                 this.__switchTurn(this.__turnIsWith);
             }
-            else{
+            else {
                 this.__selectedCell.IsCoinLocked = true;
             }
             //this.__selectedCell.IsSelected = false;
@@ -65,7 +66,6 @@ export class ChessboardService implements ICoinShiftable {
             //this.__switchTurn(this.__turnIsWith);
         }
         else if (cellToSelect.CurrentCoin && this.__turnIsWith == cellToSelect.CurrentCoin.Color) { // Coin selection to move
-            this.__selectedCell.IsSelected = false;
             cellToSelect.IsSelected = true;
             this.__selectedCell = cellToSelect;
             this.__setPlacesToMove(this.__selectedCell)
@@ -77,7 +77,7 @@ export class ChessboardService implements ICoinShiftable {
         this.__clearPlacesToMove();
         cellToUnselect.IsSelected = false;
         cellToUnselect.IsCoinLocked = false;
-        this.__selectedCell = {}
+        this.__selectedCell = undefined
     }
 
     UpdateCoinMove(coin: AbstractChessCoin): void {

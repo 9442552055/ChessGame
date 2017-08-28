@@ -48,9 +48,12 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
             this.ChessCoinPosition.Column = this.__oldPosition.Column;
             return false;
         }
-        if(!this.__chesscoinService.IsOtherKingSafe(this.Color)){
-            alert("Check !!!");
-        }
+        setTimeout(() => {
+            if (!this.__chesscoinService.IsOtherKingSafe(this.Color)) {
+                alert("Check !!!");
+            }
+        }, 50);
+
         return true;
     }
 }
