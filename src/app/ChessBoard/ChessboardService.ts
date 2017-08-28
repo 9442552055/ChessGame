@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ChessColor } from '../ChessColor';
-import { ChessPosition } from '../ChessPosition';
-import { ChessboardCell } from './ChessboardCell';
-import { ICoinShiftable } from '../ICoinShiftable'
+import { ChessColor, ICoinShiftable, ChessPosition, AbstractChessCoin } from '../Base';
+import { ChessboardCell } from "./ChessboardCell";
 
 @Injectable()
 export class ChessboardService implements ICoinShiftable {
@@ -82,7 +80,7 @@ export class ChessboardService implements ICoinShiftable {
         this.__selectedCell = {}
     }
 
-    UpdateCoinMove(coin: any): void {
+    UpdateCoinMove(coin: AbstractChessCoin): void {
         this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].CurrentCoin = coin;
     }
 

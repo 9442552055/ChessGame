@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { ChessboardComponent, ChessboardCell, ChessboardServiceFactory, ChessboardService } from './ChessBoard';
 
-import { Solider, Tower, Horse, Bishop, Queen, King, ChesscoinService } from './ChessCoins';
+import { Solider, Tower, Horse, Bishop, Queen, King, ChesscoinService, CoinInitializer } from './ChessCoins';
 
-import { ICoinShiftable } from './ICoinShiftable'
+import { ICoinShiftable } from './Base'
 
 
 @NgModule({
@@ -15,7 +15,12 @@ import { ICoinShiftable } from './ICoinShiftable'
   imports: [
     BrowserModule
   ],
-  providers: [{ provide: 'ChessboardService', useFactory: ChessboardServiceFactory }, ChesscoinService, { provide: 'ICoinShiftable', useFactory: ChessboardServiceFactory }],
+  providers: [
+    { provide: 'IChesscoinService', useClass: ChesscoinService },
+    { provide: 'ChessboardService', useFactory: ChessboardServiceFactory },
+    { provide: 'ICoinShiftable', useFactory: ChessboardServiceFactory },
+    { provide: 'ICoinInitializer', useClass: CoinInitializer }
+  ],
   bootstrap: [ChessboardComponent]
 })
 export class ChessGame { }

@@ -1,10 +1,10 @@
-import { ChessPosition } from '../ChessPosition'
-import { ChessColor } from '../ChessColor'
-
 
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { ChesscoinService } from "./ChesscoinService"; import { ChessboardService } from "../ChessBoard/ChessboardService";
-import { ICoinShiftable } from "../ICoinShiftable";
+
+import { ChessPosition } from './ChessPosition'
+import { ChessColor } from './ChessColor'
+import { IChesscoinService } from "./IChesscoinService";
+import { ICoinShiftable } from "./ICoinShiftable";
 
 
 export abstract class AbstractChessCoin implements OnInit, OnDestroy {
@@ -15,13 +15,13 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
     @Input('ChessCoinPosition')
     ChessCoinPosition: ChessPosition;
 
-    protected __chesscoinService: ChesscoinService;
+    protected __chesscoinService: IChesscoinService;
     protected __coinShifter: ICoinShiftable;
     private __oldPosition: ChessPosition;
 
     abstract Name: String;
     __id: number;
-    constructor(ChesscoinService: ChesscoinService, coinShifter: ICoinShiftable) {
+    constructor(ChesscoinService: IChesscoinService, coinShifter: ICoinShiftable) {
         this.__chesscoinService = ChesscoinService;
         this.__id = new Date().getTime();
         this.__coinShifter = coinShifter;

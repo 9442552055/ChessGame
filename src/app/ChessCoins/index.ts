@@ -5,9 +5,7 @@ import { Bishop } from './Bishop';
 import { Queen } from './Queen';
 import { King } from './King';
 
-
-import AbstractChessCoin from './AbstractChessCoin';
-
 import ChesscoinService from './ChesscoinService';
+import { CoinInitializer } from './CoinInitializer';
 
-export { Solider, Tower, Horse, Bishop, Queen, King, AbstractChessCoin, ChesscoinService }
+export { Solider, Tower, Horse, Bishop, Queen, King, ChesscoinService, CoinInitializer }

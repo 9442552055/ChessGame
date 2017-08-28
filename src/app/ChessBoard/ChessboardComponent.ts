@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import ChessPosition from '../ChessPosition';
+import { ChessPosition } from '../Base';
 
 @Component({
   selector: 'chess-board',

@@ -1,9 +1,6 @@
-import { ChessPosition } from '../ChessPosition'
-import { AbstractChessCoin } from './AbstractChessCoin';
+
 import { Component, Inject } from '@angular/core';
-import { ChesscoinService } from "./ChesscoinService"; import { ChessboardService } from "../ChessBoard/ChessboardService";
-import { ChessColor } from "../ChessColor";
-import { ICoinShiftable } from "../ICoinShiftable";
+import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService, ICoinShiftable } from '../Base';
 
 @Component({
     selector: 'solider',
@@ -11,7 +8,7 @@ import { ICoinShiftable } from "../ICoinShiftable";
 })
 export class Solider extends AbstractChessCoin {
     Name: String = "solider";
-    constructor(ChesscoinService: ChesscoinService, @Inject('ICoinShiftable') CoinShifter: ICoinShiftable) {
+    constructor(@Inject('IChesscoinService') ChesscoinService: IChesscoinService, @Inject('ICoinShiftable') CoinShifter: ICoinShiftable) {
         // super( "solider", _color == ChessColor.black ? "&#9823;" : "&#9817;");
         super(ChesscoinService, CoinShifter);
     }

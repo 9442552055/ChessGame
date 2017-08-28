@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ChessColor } from '../ChessColor';
-import { ChessPosition } from '../ChessPosition';
-import { AbstractChessCoin } from "./AbstractChessCoin";
+import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService } from '../Base';
+
 
 
 @Injectable()
-export class ChesscoinService {
+export class ChesscoinService implements IChesscoinService {
     private __chesscoins: AbstractChessCoin[] = [];
     private __coinsHash: any = {};
     private __kings: any = {}
