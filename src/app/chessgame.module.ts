@@ -5,8 +5,6 @@ import { ChessboardComponent, ChessboardCell, ChessboardServiceFactory, Chessboa
 
 import { Solider, Tower, Horse, Bishop, Queen, King, ChesscoinService, CoinInitializer } from './ChessCoins';
 
-import { ICoinShiftable } from './Base'
-
 
 @NgModule({
   declarations: [
