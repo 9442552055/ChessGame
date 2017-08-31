@@ -4,11 +4,11 @@ import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService, ICoinS
 
 @Component({
     selector: 'solider',
-    template: '<span [ngStyle]="UIPosition"><span *ngIf="Color">&#9817;</span><span *ngIf="!Color">&#9823;</span></span>'
+    template: '<span (click)="OnClick($event)" [ngStyle]="UIPosition"><span *ngIf="Color">&#9817;</span><span *ngIf="!Color">&#9823;</span></span>'
 })
 export class Solider extends AbstractChessCoin {
     Name: String = "solider";
-    constructor(@Inject('IChesscoinService') ChesscoinService: IChesscoinService, @Inject('ICoinShiftable') CoinShifter: ICoinShiftable) {
+    constructor( @Inject('IChesscoinService') ChesscoinService: IChesscoinService, @Inject('ICoinShiftable') CoinShifter: ICoinShiftable) {
         // super( "solider", _color == ChessColor.black ? "&#9823;" : "&#9817;");
         super(ChesscoinService, CoinShifter);
     }
@@ -53,10 +53,10 @@ export class Solider extends AbstractChessCoin {
         if ((this.Color == ChessColor.black && this.ChessCoinPosition.Row < 7)
             || (this.Color == ChessColor.white && this.ChessCoinPosition.Row > 0)) {
             var p5 = GetPositionByColorOperation(this, 1);
+            p5.Column++;
             //right
             //Check not exceed board limit right
             if (p5.Column < 7) {
-                p5.Column++;
                 var sidecoinA = this.__chesscoinService.GetCoinIfExists(p5);
                 if (sidecoinA && sidecoinA.Color != this.Color) {
                     places.push(p5);

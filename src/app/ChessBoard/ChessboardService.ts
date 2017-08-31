@@ -4,6 +4,7 @@ import { ChessboardCell } from "./ChessboardCell";
 
 @Injectable()
 export class ChessboardService implements ICoinShiftable {
+
     private __chessBoardCells: ChessboardCell[][] = [];
     private __selectedCell: ChessboardCell;
     private __turnIsWith: ChessColor = ChessColor.white;
@@ -48,8 +49,8 @@ export class ChessboardService implements ICoinShiftable {
             if (moved) {
                 this.__selectedCell.IsSelected = false;
                 if (cellToSelect.CurrentCoin) {
-                    this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
-                    this.__removedCoins[this.__removedCoins.length - 1].top = this.__removedCoins.length * 10;
+                    this.__removedCoins.push(cellToSelect.CurrentCoin);
+                    this.__removedCoins[this.__removedCoins.length - 1].top = 10 + (this.__removedCoins.length * 80);
                     this.__removedCoins[this.__removedCoins.length - 1].left = 10;
                     cellToSelect.CurrentCoin = undefined;
                 }
@@ -90,8 +91,16 @@ export class ChessboardService implements ICoinShiftable {
         this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].CurrentCoin = coin;
         coin.top = this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].top;
         coin.left = this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].left;
+        coin.IsCoinSelected = false;
     }
 
+    Select(coin: AbstractChessCoin): void {
+        this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].OnClick();
+    }
+
+    UnSelect(coin: AbstractChessCoin): void {
+        this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].OnClick();
+    }
 
 }
 

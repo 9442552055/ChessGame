@@ -27,6 +27,7 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
         };
     }
 
+    IsCoinSelected: boolean;
 
     UIPosition = this.__positionClosure(this);
 
@@ -51,6 +52,17 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.__chesscoinService.RemoveChessCoin(this, this.__oldPosition);
+    }
+
+    OnClick(): void {
+        if (this.IsCoinSelected) {
+            this.IsCoinSelected = false;
+            this.__coinShifter.UnSelect(this);
+        }
+        else {
+            this.IsCoinSelected = true;
+            this.__coinShifter.Select(this);
+        }
     }
 
     abstract GetShiftablePlaces(): ChessPosition[];

@@ -1,8 +1,8 @@
  .chessboard {
-     width: 670px;
-     height: 670px;
+     width: 676px;
+     height: 676px;
      margin: 20px;
-     border: 20px solid #333;
+     border: 5px solid #333;
      margin: auto;
  }
  
@@ -16,15 +16,15 @@
  }
  
  .chess-cell.selected {
-     color: green;
+     border: 2px solid green;
  }
  
  .chess-cell.coin-shiftable {
-     border: 1.5px solid blue;
+     border: 2px solid blue;
  }
  
  .chess-cell.coin-locked {
-     border: 1.5px solid red;
+     border: 2px solid red;
  }
  
  .white .col-row-info,
@@ -43,7 +43,7 @@
      text-align: center;
      display: table-cell;
      vertical-align: middle;
-     border: 1.5px solid transparent;
+     border: 2px solid transparent;
  }
  
  .white {
@@ -54,7 +54,7 @@
      text-align: center;
      display: table-cell;
      vertical-align: middle;
-     border: 1.5px solid transparent;
+     border: 2px solid transparent;
  }
  
  .clear-both {

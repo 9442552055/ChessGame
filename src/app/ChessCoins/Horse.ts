@@ -4,7 +4,7 @@ import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService, ICoinS
 
 @Component({
     selector: 'horse',
-    template: '<span [ngStyle]="UIPosition"><span *ngIf="Color">&#9816;</span><span *ngIf="!Color">&#9822;</span></span>'
+    template: '<span (click)="OnClick($event)" [ngStyle]="UIPosition"><span *ngIf="Color">&#9816;</span><span *ngIf="!Color">&#9822;</span></span>'
 })
 export class Horse extends AbstractChessCoin {
     Name: String = "horse";

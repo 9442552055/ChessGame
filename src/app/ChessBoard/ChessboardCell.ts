@@ -41,7 +41,7 @@ export class ChessboardCell implements OnInit, IChessboardCell {
         // console.log(this.elementRef.nativeElement);
     }
 
-    OnClick(event): void {
+    OnClick(): void {
         if (!this.IsSelected) {
             this.__chessboardService.SelectCell(this);
         }
