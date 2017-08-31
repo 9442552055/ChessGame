@@ -8,6 +8,5 @@ export interface IChessboardCell {
     IsSelected: boolean;
     IsCoinShiftable: boolean;
     IsCoinLocked: boolean;
-    OnClick(): void;
 }
 export default IChessboardCell;

@@ -1,5 +1,5 @@
 
-import { Component, Input, OnInit, Inject/*, ChangeDetectorRef, ChangeDetectionStrategy*/ } from '@angular/core';
+import { ElementRef, Component, Input, OnInit, Inject, AfterContentInit, AfterContentChecked, AfterViewChecked, /*ViewChild, ChangeDetectorRef, ChangeDetectionStrategy*/ } from '@angular/core';
 import { AbstractChessCoin, ChessColor, ChessPosition, IChessboardCell, ICoinInitializer } from "../Base";
 
 
@@ -13,36 +13,40 @@ import ChessboardService from "./ChessboardService";
 })
 export class ChessboardCell implements OnInit, IChessboardCell {
 
+    //@ViewChild("CurrentCoin") //removed as data flows parent to child and not child to parent
     CurrentCoin: AbstractChessCoin;
 
     IsSelected: boolean;
     IsCoinShiftable: boolean;
     IsCoinLocked: boolean;
+    get top(): any {
+        return this.elementRef.nativeElement.firstElementChild.offsetTop
+    }
+    get left(): any {
+        //var remainingSpace = this.elementRef.nativeElement.firstElementChild.offsetLeft - this.elementRef.nativeElement.firstElementChild.offsetWidth;
+        return this.elementRef.nativeElement.firstElementChild.offsetLeft;// + (remainingSpace / 2)
+    }
 
     @Input('ChessCellPosition')
     ChessCellPosition: ChessPosition;
-    private __chessGameService: ChessboardService;
+    private __chessboardService: ChessboardService;
     private __coinInitializer: ICoinInitializer;
     //ChangeDetector: ChangeDetectorRef;
-    constructor( @Inject('ChessboardService') private ChessboardService: ChessboardService,
-        @Inject('ICoinInitializer') private coinInitializer: ICoinInitializer){
-        //,changeDetectorRef: ChangeDetectorRef) {
-        this.__chessGameService = ChessboardService;
-        this.__coinInitializer = coinInitializer;
-        //this.ChangeDetector = changeDetectorRef;
+    constructor(private elementRef: ElementRef, @Inject('ChessboardService') private ChessboardService: ChessboardService) {
+        this.__chessboardService = ChessboardService;
     }
 
     ngOnInit(): void {
-        this.__coinInitializer.LoadCoin(this);
-        this.__chessGameService.AddPlaceHolder(this);
+        this.__chessboardService.AddPlaceHolder(this);
+        // console.log(this.elementRef.nativeElement);
     }
 
-    OnClick(): void {
+    OnClick(event): void {
         if (!this.IsSelected) {
-            this.__chessGameService.SelectCell(this);
+            this.__chessboardService.SelectCell(this);
         }
         else {
-            this.__chessGameService.UnSelectCell(this);
+            this.__chessboardService.UnSelectCell(this);
         }
     };
 

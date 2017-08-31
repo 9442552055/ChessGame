@@ -1,9 +1,20 @@
 <div class="chessboard">
     <div class="clear-both chess-row" *ngFor="let rowCells of PlaceHolders">
-        <div class="chess-cell" *ngFor="let cellPlaceHolder of rowCells">
+        <div *ngFor="let cellPlaceHolder of rowCells">
             <chessboard-cell [ChessCellPosition]="cellPlaceHolder">
 
             </chessboard-cell>
         </div>
     </div>
+</div>
+<div style="position:absolute;top:0;left:0;" class="coins 64-coins-instance-created-here-this-will-be-associated-to-cells-based-on-x-y">
+    <div *ngFor="let coin of Coins">
+        <solider *ngIf="coin.Name=='solider'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></solider>
+        <tower *ngIf="coin.Name=='tower'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></tower>
+        <horse *ngIf="coin.Name=='horse'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></horse>
+        <bishop *ngIf="coin.Name=='bishop'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></bishop>
+        <queen *ngIf="coin.Name=='queen'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></queen>
+        <king *ngIf="coin.Name=='king'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></king>
+    </div>
+
 </div>

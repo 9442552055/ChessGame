@@ -3,6 +3,7 @@ import { ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService } from 
 
 @Injectable()
 export class ChesscoinService implements IChesscoinService {
+    
     private __chesscoins: AbstractChessCoin[] = [];
     //private __coinsHash: any = {};
     private __kings: any = {}

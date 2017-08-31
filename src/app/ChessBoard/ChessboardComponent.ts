@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ChessPosition } from '../Base';
+import { Component, Inject } from '@angular/core';
+import { ChessPosition, ICoinInitializer, AbstractChessCoin } from '../Base';
 
 @Component({
   selector: 'chess-board',
@@ -9,13 +9,20 @@ import { ChessPosition } from '../Base';
 export class ChessboardComponent {
 
   PlaceHolders: ChessPosition[][] = [];
-
-  constructor() {
+  Coins: AbstractChessCoin[] = [];
+  private __coinInitializer: ICoinInitializer
+  constructor( @Inject('ICoinInitializer') private coinInitializer: ICoinInitializer) {
+    this.__coinInitializer = coinInitializer;
     //Load 8 x 8 = 64 Cell - matrix
     for (var row = 0; row < 8; row++) {
       var rowHolder: ChessPosition[] = [];
       for (var col = 0; col < 8; col++) {
-        rowHolder.push(new ChessPosition(row, col));
+        var p = new ChessPosition(row, col)
+        rowHolder.push(p);
+        var c:AbstractChessCoin = this.__coinInitializer.LoadCoin(p);
+        if (c) {
+          this.Coins.push(c);
+        }
       }
       this.PlaceHolders.push(rowHolder);
     }

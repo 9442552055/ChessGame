@@ -1,52 +1,60 @@
 
 import { Solider, Tower, Horse, Bishop, Queen, King } from './'
-import { ICoinInitializer, IChessboardCell, ChessColor, ChessPosition, AbstractChessCoin } from "../Base";
+import { ICoinInitializer, IChessboardCell, ChessColor, ChessPosition, AbstractChessCoin, IChesscoinService } from "../Base";
+import { Inject } from '@angular/core';
 
 export class CoinInitializer implements ICoinInitializer {
-    private __setCellValues = function (coin: AbstractChessCoin, cell: IChessboardCell, color: ChessColor): void {
-        cell.CurrentCoin = coin;
-        cell.CurrentCoin.Color = color;
-        cell.CurrentCoin.ChessCoinPosition = new ChessPosition(cell.ChessCellPosition.Row, cell.ChessCellPosition.Column)
+    private __chesscoinService: IChesscoinService;
+    constructor(@Inject('IChesscoinService') private chesscoinService: IChesscoinService) {
+        this.__chesscoinService = chesscoinService;
     }
-    LoadCoin(cell: IChessboardCell): void {
-        if (cell.ChessCellPosition.Row == 0) {
-            if (cell.ChessCellPosition.Column == 0 || cell.ChessCellPosition.Column == 7) {
-                this.__setCellValues(new Tower(null, null), cell, ChessColor.black)
+    private __setCellValues = function (coin: AbstractChessCoin, ChessCellPosition: ChessPosition, color: ChessColor): AbstractChessCoin {
+        coin.Color = color;
+        coin.ChessCoinPosition = new ChessPosition(ChessCellPosition.Row, ChessCellPosition.Column)
+        this.__chesscoinService.AddChessCoin(coin)
+        //CurrentCoin = coin;
+        return coin;
+    }
+    //LoadCoin(cell: IChessboardCell): void {
+    LoadCoin(ChessCellPosition: ChessPosition): AbstractChessCoin {
+        if (ChessCellPosition.Row == 0) {
+            if (ChessCellPosition.Column == 0 || ChessCellPosition.Column == 7) {
+               return this.__setCellValues(new Tower(null, null), ChessCellPosition, ChessColor.black)
             }
-            else if (cell.ChessCellPosition.Column == 1 || cell.ChessCellPosition.Column == 6) {
-                this.__setCellValues(new Horse(null, null), cell, ChessColor.black)
+            else if (ChessCellPosition.Column == 1 || ChessCellPosition.Column == 6) {
+               return this.__setCellValues(new Horse(null, null), ChessCellPosition, ChessColor.black)
             }
-            else if (cell.ChessCellPosition.Column == 2 || cell.ChessCellPosition.Column == 5) {
-                this.__setCellValues(new Bishop(null, null), cell, ChessColor.black)
+            else if (ChessCellPosition.Column == 2 || ChessCellPosition.Column == 5) {
+               return this.__setCellValues(new Bishop(null, null), ChessCellPosition, ChessColor.black)
             }
-            else if (cell.ChessCellPosition.Column == 4) {
-                this.__setCellValues(new Queen(null, null), cell, ChessColor.black)
+            else if (ChessCellPosition.Column == 4) {
+               return this.__setCellValues(new Queen(null, null), ChessCellPosition, ChessColor.black)
             }
-            else if (cell.ChessCellPosition.Column == 3) {
-                this.__setCellValues(new King(null, null), cell, ChessColor.black)
+            else if (ChessCellPosition.Column == 3) {
+               return this.__setCellValues(new King(null, null), ChessCellPosition, ChessColor.black)
             }
         }
-        else if (cell.ChessCellPosition.Row == 1) {
-            this.__setCellValues(new Solider(null, null), cell, ChessColor.black)
+        else if (ChessCellPosition.Row == 1) {
+           return this.__setCellValues(new Solider(null, null), ChessCellPosition, ChessColor.black)
         }
-        else if (cell.ChessCellPosition.Row == 6) {
-            this.__setCellValues(new Solider(null, null), cell, ChessColor.white)
+        else if (ChessCellPosition.Row == 6) {
+           return this.__setCellValues(new Solider(null, null), ChessCellPosition, ChessColor.white)
         }
-        else if (cell.ChessCellPosition.Row == 7) {
-            if (cell.ChessCellPosition.Column == 0 || cell.ChessCellPosition.Column == 7) {
-                 this.__setCellValues(new Tower(null, null), cell, ChessColor.white)
+        else if (ChessCellPosition.Row == 7) {
+            if (ChessCellPosition.Column == 0 || ChessCellPosition.Column == 7) {
+               return this.__setCellValues(new Tower(null, null), ChessCellPosition, ChessColor.white)
             }
-            else if (cell.ChessCellPosition.Column == 1 || cell.ChessCellPosition.Column == 6) {
-                 this.__setCellValues(new Horse(null, null), cell, ChessColor.white)
+            else if (ChessCellPosition.Column == 1 || ChessCellPosition.Column == 6) {
+               return this.__setCellValues(new Horse(null, null), ChessCellPosition, ChessColor.white)
             }
-            else if (cell.ChessCellPosition.Column == 2 || cell.ChessCellPosition.Column == 5) {
-                 this.__setCellValues(new Bishop(null, null), cell, ChessColor.white)
+            else if (ChessCellPosition.Column == 2 || ChessCellPosition.Column == 5) {
+               return this.__setCellValues(new Bishop(null, null), ChessCellPosition, ChessColor.white)
             }
-            else if (cell.ChessCellPosition.Column == 4) {
-                 this.__setCellValues(new Queen(null, null), cell, ChessColor.white)
+            else if (ChessCellPosition.Column == 4) {
+               return this.__setCellValues(new Queen(null, null), ChessCellPosition, ChessColor.white)
             }
-            else if (cell.ChessCellPosition.Column == 3) {
-                 this.__setCellValues(new King(null, null), cell, ChessColor.white)
+            else if (ChessCellPosition.Column == 3) {
+               return this.__setCellValues(new King(null, null), ChessCellPosition, ChessColor.white)
             }
         }
     }

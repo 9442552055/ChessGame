@@ -1,8 +1,10 @@
 // import { Injectable } from '@angular/core';
 // @Injectable()
-import { IChessboardCell } from "./IChessboardCell";
+import { ChessPosition } from "./ChessPosition";
+import { AbstractChessCoin } from "./AbstractChessCoin";
 
 export interface ICoinInitializer {
-    LoadCoin(cell: IChessboardCell): void;
+    //LoadCoin(cell: IChessboardCell): void;
+    LoadCoin(cell: ChessPosition): AbstractChessCoin;
 }
 export default ICoinInitializer;

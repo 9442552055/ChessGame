@@ -1,12 +1,6 @@
 <div class="chess-cell" [ngClass]="{'black' : ChessCellPosition.Color,'white':!ChessCellPosition.Color,
-'clear-both':!ChessCellPosition.Column, 'selected':IsSelected, 'coin-shiftable':IsCoinShiftable,'coin-locked':IsCoinLocked}" (click)="OnClick()">
+'clear-both':!ChessCellPosition.Column, 'selected':IsSelected, 'coin-shiftable':IsCoinShiftable,'coin-locked':IsCoinLocked}" (click)="OnClick($event)">
     <!-- {{CurrentCoin?CurrentCoin.Code:""}}-->
 
-    <solider class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='solider'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></solider>
-    <tower class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='tower'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></tower>
-    <horse class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='horse'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></horse>
-    <bishop class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='bishop'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></bishop>
-    <queen class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='queen'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></queen>
-    <king class="chess-coin" *ngIf="CurrentCoin && CurrentCoin.Name=='king'" [Color]="CurrentCoin.Color" [ChessCoinPosition]="CurrentCoin.ChessCoinPosition"></king>
     <span class="col-row-info">{{ChessCellPosition.Row}},{{ChessCellPosition.Column}}</span>
 </div>

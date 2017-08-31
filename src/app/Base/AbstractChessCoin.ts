@@ -14,7 +14,24 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
 
     @Input('ChessCoinPosition')
     ChessCoinPosition: ChessPosition;
+    private __positionClosure: any = function (me) {
+        return {
+            get top() {
+                return me.top + 'px';
+            },
+            get left() {
+                return me.left + 'px'
+            },
+            position: 'absolute',
+            'z-index': '100'
+        };
+    }
 
+
+    UIPosition = this.__positionClosure(this);
+
+    top: number;
+    left: number;
     protected __chesscoinService: IChesscoinService;
     protected __coinShifter: ICoinShiftable;
     private __oldPosition: ChessPosition;
@@ -28,7 +45,7 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
     }
     ngOnInit(): void {
         //console.log(this);
-        this.__chesscoinService.AddChessCoin(this);
+        //this.__chesscoinService.AddChessCoin(this);
         this.__coinShifter.UpdateCoinMove(this);
     }
 

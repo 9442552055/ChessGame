@@ -49,8 +49,13 @@ export class ChessboardService implements ICoinShiftable {
                 this.__selectedCell.IsSelected = false;
                 if (cellToSelect.CurrentCoin) {
                     this.__removedCoins.push({ ...cellToSelect.CurrentCoin })
+                    this.__removedCoins[this.__removedCoins.length - 1].top = this.__removedCoins.length * 10;
+                    this.__removedCoins[this.__removedCoins.length - 1].left = 10;
+                    cellToSelect.CurrentCoin = undefined;
                 }
                 cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;
+                cellToSelect.CurrentCoin.top = cellToSelect.top;
+                cellToSelect.CurrentCoin.left = cellToSelect.left;
                 this.__selectedCell.CurrentCoin = undefined;
                 this.__switchTurn(this.__turnIsWith);
             }
@@ -83,6 +88,8 @@ export class ChessboardService implements ICoinShiftable {
 
     UpdateCoinMove(coin: AbstractChessCoin): void {
         this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].CurrentCoin = coin;
+        coin.top = this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].top;
+        coin.left = this.__chessBoardCells[coin.ChessCoinPosition.Row][coin.ChessCoinPosition.Column].left;
     }
 
 
