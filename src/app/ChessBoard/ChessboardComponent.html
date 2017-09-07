@@ -7,7 +7,7 @@
         </div>
     </div>
 </div>
-<div style="position:absolute;top:0;left:0;" class="coins 64-coins-instance-created-here-this-will-be-associated-to-cells-based-on-x-y">
+<div style="position:absolute;top:0;left:0;width:100%" class="coins 64-coins-instance-created-here-this-will-be-associated-to-cells-based-on-x-y">
     <div *ngFor="let coin of Coins">
         <solider *ngIf="coin.Name=='solider'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></solider>
         <tower *ngIf="coin.Name=='tower'" class="chess-coin" [Color]="coin.Color" [ChessCoinPosition]="coin.ChessCoinPosition"></tower>

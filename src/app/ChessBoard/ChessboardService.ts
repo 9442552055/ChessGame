@@ -9,7 +9,8 @@ export class ChessboardService implements ICoinShiftable {
     private __selectedCell: ChessboardCell;
     private __turnIsWith: ChessColor = ChessColor.white;
     private __positionsToMove: ChessPosition[];
-    private __removedCoins = [];
+    private __removedCoins = {0:[],1:[]};
+    private __positionByColor = { 0: "left", 1: "right" }
 
     private __clearPlacesToMove = (): void => {
         for (var a = 0; a < this.__positionsToMove.length; a++) {
@@ -49,9 +50,14 @@ export class ChessboardService implements ICoinShiftable {
             if (moved) {
                 this.__selectedCell.IsSelected = false;
                 if (cellToSelect.CurrentCoin) {
-                    this.__removedCoins.push(cellToSelect.CurrentCoin);
-                    this.__removedCoins[this.__removedCoins.length - 1].top = 10 + (this.__removedCoins.length * 80);
-                    this.__removedCoins[this.__removedCoins.length - 1].left = 10;
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color].push(cellToSelect.CurrentCoin);
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1].top = 10 + (this.__removedCoins[cellToSelect.CurrentCoin.Color].length * 80);
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1].left = 0;
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1].right = 0;
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1][this.__positionByColor[cellToSelect.CurrentCoin.Color]] = 10;
+
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1].ChessCoinPosition.Row = -1;
+                    this.__removedCoins[cellToSelect.CurrentCoin.Color][this.__removedCoins[cellToSelect.CurrentCoin.Color].length - 1].ChessCoinPosition.Column = -1;
                     cellToSelect.CurrentCoin = undefined;
                 }
                 cellToSelect.CurrentCoin = this.__selectedCell.CurrentCoin;

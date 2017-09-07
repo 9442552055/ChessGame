@@ -123,7 +123,7 @@ export class ChesscoinService implements IChesscoinService {
             if (opponentcoin && (opponentcoin.Name == 'bishop' || opponentcoin.Name == 'queen')) {
                 return false;
             }
-            if (opponentcoin && (opponentcoin.Name == 'solider' || opponentcoin.Name == 'king' && places.length == 1)) {
+            if (opponentcoin && ((opponentcoin.Name == 'solider' || opponentcoin.Name == 'king') && places.length == 1)) {
                 return false;
             }
         }

@@ -20,7 +20,10 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
                 return me.top + 'px';
             },
             get left() {
-                return me.left + 'px'
+                return me.left? me.left + 'px':''
+            },
+            get right() {
+                return me.right? me.right + 'px':''
             },
             position: 'absolute',
             'z-index': '100'
@@ -33,6 +36,8 @@ export abstract class AbstractChessCoin implements OnInit, OnDestroy {
 
     top: number;
     left: number;
+    right: number;
+    
     protected __chesscoinService: IChesscoinService;
     protected __coinShifter: ICoinShiftable;
     private __oldPosition: ChessPosition;
